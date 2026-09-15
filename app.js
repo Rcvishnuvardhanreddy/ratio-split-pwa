@@ -162,4 +162,11 @@ if ('serviceWorker' in navigator) {
       /* offline support unavailable, app still works online */
     });
   });
+
+  let reloadedForUpdate = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (reloadedForUpdate) return;
+    reloadedForUpdate = true;
+    window.location.reload();
+  });
 }
