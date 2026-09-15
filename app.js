@@ -17,7 +17,7 @@ function loadRows() {
 }
 
 function defaultRows() {
-  return Array.from({ length: 5 }, () => ({ name: '', amount: 0, ratio: 1 }));
+  return Array.from({ length: 2 }, () => ({ name: '', amount: 0, ratio: 1 }));
 }
 
 function saveRows() {
@@ -123,7 +123,7 @@ function renderResults() {
     const isNeg = result < 0;
     const span = document.createElement('span');
     span.className = 'value';
-    span.textContent = (isNeg ? '⚠ ' : '') + formatNumber(result);
+    span.textContent = formatNumber(result);
     cell.appendChild(span);
     cell.classList.toggle('pos', !isNeg);
     cell.classList.toggle('neg', isNeg);

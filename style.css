@@ -9,8 +9,6 @@
   --danger: #dc2626;
   --result-pos: #059669;
   --result-neg: #dc2626;
-  --result-neg-bg: #fee2e2;
-  --result-neg-border: #fca5a5;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,8 +23,6 @@
     --danger: #f87171;
     --result-pos: #34d399;
     --result-neg: #f87171;
-    --result-neg-bg: #3f1d1d;
-    --result-neg-border: #7f2d2d;
   }
 }
 
@@ -150,11 +146,8 @@ input:focus {
 }
 
 .result-cell span.value {
-  display: inline-block;
   font-variant-numeric: tabular-nums;
   font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 999px;
 }
 
 .result-cell.pos span.value {
@@ -163,8 +156,6 @@ input:focus {
 
 .result-cell.neg span.value {
   color: var(--result-neg);
-  background: var(--result-neg-bg);
-  border: 1px solid var(--result-neg-border);
 }
 
 .del-btn {
