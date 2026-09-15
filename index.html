@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Ratio Split</title>
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="description" content="Split amounts by ratio, right on your phone." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Ratio Split" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Ratio Split</h1>
+  </header>
+
+  <main class="app-main">
+    <div class="table-wrap">
+      <table id="rows-table">
+        <thead>
+          <tr>
+            <th class="col-name">Name</th>
+            <th class="col-amount">Amount</th>
+            <th class="col-ratio">Ratio</th>
+            <th class="col-total">Total</th>
+            <th class="col-result">Result</th>
+            <th class="col-del"></th>
+          </tr>
+        </thead>
+        <tbody id="rows-body"></tbody>
+      </table>
+    </div>
+
+    <div class="btn-row">
+      <button id="add-row-btn" class="add-btn" type="button">+ Add</button>
+      <button id="clear-btn" class="clear-btn" type="button">Clear</button>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
