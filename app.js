@@ -34,12 +34,13 @@ function computeTotal(row) {
   return effectiveAmount(row) * (Number(row.ratio) || 0);
 }
 
-function sumAmounts() {
-  return rows.reduce((sum, row) => sum + effectiveAmount(row), 0);
+function rawSumAmounts() {
+  return rows.reduce((sum, row) => sum + (Number(row.amount) || 0), 0);
 }
 
 function computeResult(row) {
-  return sumAmounts() - computeTotal(row);
+  const otherAmounts = rawSumAmounts() - (Number(row.amount) || 0);
+  return otherAmounts * AMOUNT_SCALE - computeTotal(row);
 }
 
 function formatNumber(n) {
