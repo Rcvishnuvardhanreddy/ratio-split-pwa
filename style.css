@@ -45,25 +45,25 @@ body {
 }
 
 .app-header {
-  padding: calc(env(safe-area-inset-top) + 16px) 16px 12px;
+  padding: calc(env(safe-area-inset-top) + 10px) 12px 8px;
   text-align: center;
 }
 
 .app-header h1 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.05rem;
   font-weight: 700;
 }
 
 .app-main {
-  padding: 0 12px 24px;
+  padding: 0 6px 14px;
   max-width: 720px;
   margin: 0 auto;
 }
 
 .table-wrap {
   background: var(--surface);
-  border-radius: 14px;
+  border-radius: 12px;
   overflow-x: auto;
   border: 1px solid var(--border);
 }
@@ -71,22 +71,46 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 560px;
+  table-layout: fixed;
+}
+
+.col-hno {
+  width: 13%;
+  text-align: center;
+}
+
+.col-amount {
+  width: 19%;
+  text-align: right;
+}
+
+.col-ratio {
+  width: 13%;
+  text-align: right;
+}
+
+.col-total, .col-result {
+  width: 21%;
+  text-align: right;
+}
+
+.col-del {
+  width: 12%;
 }
 
 th {
   text-align: left;
-  font-size: 0.72rem;
+  font-size: 0.6rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   color: var(--muted);
-  padding: 10px 8px;
+  padding: 6px 3px;
   border-bottom: 1px solid var(--border);
-  white-space: nowrap;
+  overflow-wrap: break-word;
 }
 
 td {
-  padding: 6px;
+  padding: 4px 3px;
   border-bottom: 1px solid var(--border);
   vertical-align: middle;
 }
@@ -95,28 +119,24 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
-.col-amount, .col-ratio, .col-total, .col-result {
-  width: 18%;
+.hno-input {
+  text-align: center;
 }
 
-.col-del {
-  width: 36px;
+.ratio-input,
+.amount-input {
+  text-align: right;
 }
 
-input[type="text"],
-input[type="number"] {
+input[type="text"] {
   width: 100%;
   border: 1px solid transparent;
   background: transparent;
   color: var(--text);
-  font-size: 0.95rem;
-  padding: 10px 8px;
+  font-size: 1rem;
+  padding: 8px 0;
   border-radius: 8px;
   min-width: 0;
-}
-
-input[type="number"] {
-  text-align: right;
 }
 
 input:focus {
@@ -125,11 +145,17 @@ input:focus {
   background: var(--bg);
 }
 
-.total-cell {
+.total-cell,
+.result-cell {
   text-align: right;
-  padding: 10px 8px;
-  white-space: nowrap;
+  padding: 6px 2px;
   font-variant-numeric: tabular-nums;
+  overflow-wrap: break-word;
+  line-height: 1.15;
+}
+
+.total-cell {
+  font-size: clamp(0.58rem, 2.5vw, 0.8rem);
   color: var(--muted);
 }
 
@@ -139,14 +165,8 @@ input:focus {
   opacity: 0.5;
 }
 
-.result-cell {
-  text-align: right;
-  padding: 10px 8px;
-  white-space: nowrap;
-}
-
 .result-cell span.value {
-  font-variant-numeric: tabular-nums;
+  font-size: clamp(0.55rem, 2.4vw, 0.84rem);
   font-weight: 700;
 }
 
@@ -159,12 +179,12 @@ input:focus {
 }
 
 .del-btn {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   border: none;
   background: transparent;
   color: var(--muted);
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1;
   border-radius: 50%;
   cursor: pointer;
@@ -175,20 +195,27 @@ input:focus {
   color: var(--danger);
 }
 
+.hint {
+  margin: 6px 2px 0;
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-align: center;
+}
+
 .btn-row {
   display: flex;
-  gap: 10px;
-  margin-top: 14px;
+  gap: 8px;
+  margin-top: 10px;
 }
 
 .add-btn,
 .clear-btn {
   flex: 1;
-  padding: 14px;
-  font-size: 1rem;
+  padding: 11px;
+  font-size: 0.92rem;
   font-weight: 600;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   cursor: pointer;
 }
 

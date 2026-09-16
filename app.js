@@ -17,19 +17,25 @@ function loadRows() {
 }
 
 function defaultRows() {
-  return Array.from({ length: 2 }, () => ({ name: '', amount: 0, ratio: 1 }));
+  return Array.from({ length: 2 }, () => ({ hno: '', amount: 0, ratio: 1 }));
 }
 
 function saveRows() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(rows));
 }
 
+const AMOUNT_SCALE = 1000;
+
+function effectiveAmount(row) {
+  return (Number(row.amount) || 0) * AMOUNT_SCALE;
+}
+
 function computeTotal(row) {
-  return (Number(row.amount) || 0) * (Number(row.ratio) || 0);
+  return effectiveAmount(row) * (Number(row.ratio) || 0);
 }
 
 function sumAmounts() {
-  return rows.reduce((sum, row) => sum + (Number(row.amount) || 0), 0);
+  return rows.reduce((sum, row) => sum + effectiveAmount(row), 0);
 }
 
 function computeResult(row) {
@@ -37,7 +43,7 @@ function computeResult(row) {
 }
 
 function formatNumber(n) {
-  return n.toLocaleString(undefined, { maximumFractionDigits: 2 });
+  return n.toLocaleString('en-IN', { maximumFractionDigits: 2 });
 }
 
 function render() {
@@ -46,22 +52,24 @@ function render() {
   rows.forEach((row, index) => {
     const tr = document.createElement('tr');
 
-    tr.appendChild(makeInputCell('text', row.name, 'Name', (val) => {
-      rows[index].name = val;
+    tr.appendChild(makeInputCell('text', row.hno || '', 'No', (val) => {
+      rows[index].hno = val.replace(/\D/g, '').slice(0, 3);
       saveRows();
-    }));
+    }, { numeric: true, maxLength: 3, className: 'hno-input' }));
 
-    tr.appendChild(makeInputCell('number', row.amount, '0', (val) => {
-      rows[index].amount = val === '' ? 0 : Number(val);
+    tr.appendChild(makeInputCell('text', row.amount === 0 ? '' : String(row.amount), '0', (val) => {
+      const digits = val.replace(/\D/g, '').slice(0, 3);
+      rows[index].amount = digits === '' ? 0 : Number(digits);
       saveRows();
       renderResults();
-    }));
+    }, { numeric: true, maxLength: 3, className: 'amount-input' }));
 
-    tr.appendChild(makeInputCell('number', row.ratio, '1', (val) => {
-      rows[index].ratio = val === '' ? 0 : Number(val);
+    tr.appendChild(makeInputCell('text', row.ratio === 0 ? '' : String(row.ratio), '1', (val) => {
+      const digits = val.replace(/\D/g, '').slice(0, 3);
+      rows[index].ratio = digits === '' ? 0 : Number(digits);
       saveRows();
       renderResults();
-    }));
+    }, { numeric: true, maxLength: 3, className: 'ratio-input' }));
 
     const totalTd = document.createElement('td');
     totalTd.className = 'total-cell';
@@ -130,20 +138,23 @@ function renderResults() {
   });
 }
 
-function makeInputCell(type, value, placeholder, onChange) {
+function makeInputCell(type, value, placeholder, onChange, options = {}) {
   const td = document.createElement('td');
   const input = document.createElement('input');
   input.type = type;
   input.placeholder = placeholder;
   input.value = value === 0 && type === 'number' ? '' : value;
   if (type === 'number') input.inputMode = 'decimal';
+  if (options.numeric) input.inputMode = 'numeric';
+  if (options.maxLength) input.maxLength = options.maxLength;
+  if (options.className) input.className = options.className;
   input.addEventListener('input', (e) => onChange(e.target.value));
   td.appendChild(input);
   return td;
 }
 
 addBtn.addEventListener('click', () => {
-  rows.push({ name: '', amount: 0, ratio: 1 });
+  rows.push({ hno: '', amount: 0, ratio: 1 });
   saveRows();
   render();
 });
