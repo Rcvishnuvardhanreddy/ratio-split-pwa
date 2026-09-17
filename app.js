@@ -17,7 +17,7 @@ function loadRows() {
 }
 
 function defaultRows() {
-  return Array.from({ length: 2 }, () => ({ hno: '', amount: 0, ratio: 1 }));
+  return Array.from({ length: 2 }, () => ({ hno: '', amount: 0, ratio: 0 }));
 }
 
 function saveRows() {
@@ -59,13 +59,13 @@ function render() {
     }, { numeric: true, maxLength: 3, className: 'hno-input' }));
 
     tr.appendChild(makeInputCell('text', row.amount === 0 ? '' : String(row.amount), '0', (val) => {
-      const digits = val.replace(/\D/g, '').slice(0, 3);
+      const digits = val.replace(/\D/g, '').slice(0, 5);
       rows[index].amount = digits === '' ? 0 : Number(digits);
       saveRows();
       renderResults();
-    }, { numeric: true, maxLength: 3, className: 'amount-input' }));
+    }, { numeric: true, maxLength: 5, className: 'amount-input' }));
 
-    tr.appendChild(makeInputCell('text', row.ratio === 0 ? '' : String(row.ratio), '1', (val) => {
+    tr.appendChild(makeInputCell('text', row.ratio === 0 ? '' : String(row.ratio), '', (val) => {
       const digits = val.replace(/\D/g, '').slice(0, 3);
       rows[index].ratio = digits === '' ? 0 : Number(digits);
       saveRows();
@@ -155,7 +155,7 @@ function makeInputCell(type, value, placeholder, onChange, options = {}) {
 }
 
 addBtn.addEventListener('click', () => {
-  rows.push({ hno: '', amount: 0, ratio: 1 });
+  rows.push({ hno: '', amount: 0, ratio: 0 });
   saveRows();
   render();
 });

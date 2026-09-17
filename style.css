@@ -75,27 +75,27 @@ table {
 }
 
 .col-hno {
-  width: 13%;
+  width: 10%;
   text-align: center;
 }
 
 .col-amount {
-  width: 19%;
+  width: 18%;
   text-align: right;
 }
 
 .col-ratio {
-  width: 13%;
+  width: 11%;
   text-align: right;
 }
 
 .col-total, .col-result {
-  width: 21%;
+  width: 23%;
   text-align: right;
 }
 
 .col-del {
-  width: 12%;
+  width: 10%;
 }
 
 th {
@@ -155,7 +155,7 @@ input:focus {
 }
 
 .total-cell {
-  font-size: clamp(0.58rem, 2.5vw, 0.8rem);
+  font-size: clamp(0.5rem, 2.4vw, 0.8rem);
   color: var(--muted);
 }
 
@@ -166,7 +166,7 @@ input:focus {
 }
 
 .result-cell span.value {
-  font-size: clamp(0.55rem, 2.4vw, 0.84rem);
+  font-size: clamp(0.48rem, 2.3vw, 0.84rem);
   font-weight: 700;
 }
 
