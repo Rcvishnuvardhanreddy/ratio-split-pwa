@@ -65,7 +65,7 @@ function render() {
       renderResults();
     }, { numeric: true, maxLength: 5, className: 'amount-input' }));
 
-    tr.appendChild(makeInputCell('text', row.ratio === 0 ? '' : String(row.ratio), '', (val) => {
+    tr.appendChild(makeInputCell('text', row.ratio === 0 ? '' : String(row.ratio), '0', (val) => {
       const digits = val.replace(/\D/g, '').slice(0, 3);
       rows[index].ratio = digits === '' ? 0 : Number(digits);
       saveRows();
